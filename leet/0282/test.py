@@ -33,4 +33,4 @@ def test_main(expected, args):
 def test_extreme():
     num = "1000000009"
     target = 9
-    print(Solution().addOperators(num, target))
+    assert 2916 >= len(Solution().addOperators(num, target))
