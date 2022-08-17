@@ -7,3 +7,7 @@ For those not in the know, the third level of the Xennial Hunt features a travel
 To achieve the highest score, the player must walk the shortest such path.
 
 To add insult to injury, the program that controls the player must be written in a variant of BASIC, with line numbers on each line and all. Well, the Python script before you can indeed generate some BASIC code, to say the least.
+
+Here is how the amazing maze looks like, in full:
+
+![Maze](/screens/scr-full.png?raw=true)
