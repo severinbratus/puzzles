@@ -14,3 +14,6 @@ foo_to_bar = {
 for index, char in enumerate(data):
     if char in 'VWXYZ':
         answ[index] = foo_to_bar[char]
+
+# CREENFUAURE
+# G      T
