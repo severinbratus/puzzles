@@ -58,26 +58,31 @@ class Solution:
         # print("Parentage:")
         # print(*parentage.items(), sep='\n')
 
-        return [list(reversed(path)) + [end_word] for path in Solution.get_paths(parentage, end_word, begin_word)]
+        @adhoc_cache
+        def get_paths(parentage, end_word, begin_word) -> list[list[str]]:
+            '''Find all paths from end_word to begin_word with the parentage lookup table / tree, excl end_word'''
+            if end_word == begin_word:
+                # No steps needed, empty path is the only path
+                return [[]]
 
+            else:
+                parents = parentage[end_word]
+                # assert len(parents) == len(set(parents))
+                # For each possible parent, recurse to find the paths with that parent
+                return [[parent] + path for parent in parents for path in get_paths(parentage, parent, begin_word)]
 
-    @staticmethod
-    def get_paths(parentage, end_word, begin_word) -> list[list[str]]:
-        '''Find all paths from end_word to begin_word with the parentage lookup table / tree, excl end_word'''
-
-        if end_word == begin_word:
-            # No steps needed, empty path is the only path
-            return [[]]
-
-        else:
-
-            parents = parentage[end_word]
-            assert len(parents) == len(set(parents))
-
-            # For each possible parent, recurse to find the paths with that parent
-            return [[parent] + path for parent in parents for path in Solution.get_paths(parentage, parent, begin_word)]
+        return sorted([list(reversed(path)) + [end_word] for path in get_paths(parentage, end_word, begin_word)])
 
 
     @staticmethod
     def is_step(word_a, word_b) -> bool:
         return sum(char_a != char_b for char_a, char_b in zip(word_a, word_b)) == 1
+
+
+def adhoc_cache(f):
+    _cache = {}
+    def g(a, b, c):
+        if (b, c) not in _cache:
+            _cache[(b, c)] = f(a, b, c)
+        return _cache[(b, c)]
+    return g
