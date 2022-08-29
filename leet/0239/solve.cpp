@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <cstddef>
+#include <deque>
 #include <queue>
 #include <unordered_map>
 #include <unordered_set>
@@ -24,7 +25,10 @@ void print(const T &t, TAIL... tail)
 
 class Solution {
 public:
-    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+    /**
+     * Log-linear in time, linear in space.
+     */
+    vector<int> maxSlidingWindowV1(vector<int>& nums, int k) {
         // heap to hold the maximum element
         priority_queue<int> heap {};
 
@@ -63,6 +67,54 @@ public:
 
         return maxes;
     }
+
+
+    /**
+     * Linear in time, linear in space.
+     */
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        // monotonically decreasing deque to hold the maximum element
+        // at each step we must mantain this property of monotonic decrease
+        deque<int> heap {};
+        // ^^^ it's not really a heap
+
+        vector<int> maxes {};
+        // unordered_map<int, int> counts {};
+
+        int left_ptr = 0, right_ptr = k;
+
+        // add initial window
+        for (int i = left_ptr; i < right_ptr; i++) {
+            push_front(heap, nums[i]);
+        }
+
+        // window is [left_ptr : right_ptr)
+        for (; right_ptr <= nums.size(); left_ptr++, right_ptr++) {
+            // we assume that the deque is valid at this point, and take the maximum
+            maxes.push_back(heap.front());
+            if (right_ptr != nums.size()) {
+                // slide elements
+                // one num left behind
+                int left_num = nums[left_ptr];
+                if (left_num == heap.front()) {
+                    heap.pop_front();
+                }
+                // one new num on the right
+                push_front(heap, nums[right_ptr]);
+            }
+        }
+        return maxes;
+    }
+
+    void push_front(deque<int> & heap, int new_num) {
+        // keep popping elements from back until back is greater than or equal to the new num.
+        while (!heap.empty() && heap.back() < new_num) {
+            heap.pop_back();
+        }
+        // push to the end only if the added num is no greater than heap back
+        heap.push_back(new_num);
+    }
+
 };
 
 TEST_CASE("Examples") {
