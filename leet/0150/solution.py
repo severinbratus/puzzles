@@ -6,30 +6,21 @@ from math import trunc
 
 class Solution:
 
-    operators = {
-        '+': add,
-        '*': mul,
-        '-': sub,
-        '/': lambda a, b: trunc(truediv(a, b))
-    }
-
     def evalRPN(self, tokens) -> int:
-
+        operators = {
+            '+': add,
+            '*': mul,
+            '-': sub,
+            '/': lambda a, b: trunc(truediv(a, b))
+        }
         stack = []
-
         for token in tokens:
-
-            if Solution.is_operator(token):
-
+            if token in "+*-/":
                 top = stack.pop()
                 subtop = stack.pop()
-
-                stack.append(Solution.operators[token](subtop, top))
+                stack.append(operators[token](subtop, top))
 
             else:
                 stack.append(int(token))
 
         return stack[0]
-
-    def is_operator(token: str):
-        return token in Solution.operators
