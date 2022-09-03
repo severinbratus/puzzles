@@ -4,7 +4,7 @@ from functools import cache
 from math import inf
 
 
-def solve_knapsack(capacity : int, weights : list[int], values : list[int]) -> tuple[int, list[int]]:
+def solve_knapsack_top_down(capacity : int, weights : list[int], values : list[int]) -> tuple[int, list[int]]:
     '''Return the value of items to take to maximize total value, under the max. weight constraint, and the item weights.
 
     A top-down dynamic programming approach w/ a cached recursive function.
@@ -33,7 +33,7 @@ def scenario():
     '''
     check_values = [1424, 147, 916, 1129]
     allowance_value = 2150
-    return solve_knapsack(allowance_value, check_values, check_values)
+    return solve_knapsack_top_down(allowance_value, check_values, check_values)
 
 
 print(scenario())
