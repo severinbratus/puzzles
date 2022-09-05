@@ -15,17 +15,17 @@ public:
             {']', '['},
             {')', '('},
         };
-        stack<int> fifo {};
+        stack<int> lifo {};
         for (const char & c : s) {
             if (c == '}' or c ==']' or c == ')') {
-                if (fifo.empty() or close_to_open[c] != fifo.top())
+                if (lifo.empty() or close_to_open[c] != lifo.top())
                     return false;
-                fifo.pop();
+                lifo.pop();
             } else {
-                fifo.push(c);
+                lifo.push(c);
             }
         }
-        return fifo.empty();
+        return lifo.empty();
     }
 };
 
