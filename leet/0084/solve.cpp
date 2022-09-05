@@ -20,13 +20,15 @@ public:
             // we want a monotonically increasing stack.
             // when a value is greater then the top of the stack in height, we simply push it.
             // otherwise, value is less than or equal to the top,
-            //   so we can extend the index of the lesser height backwards,
-            //   the greater height is simply discarded from the stack.
+            //   so we can extend the index of the lesser (new) height backwards,
+            // the greater height is simply discarded from the stack.
+            // the tricky part was establishing when and how to measure area.
+            // -- each time a height is popped from the stack, this the right end of the rectangle,
+            //   so take the left edge of the rectangle from the stack, derive the width and the area.
+
             while (!height_stack.empty() && height_stack.back() >= new_height) {
-                left_index = index_stack.back();
-                int left_height = height_stack.back();
-                height_stack.pop_back();
-                index_stack.pop_back();
+                left_index = index_stack.back(); int left_height = height_stack.back();
+                height_stack.pop_back(); index_stack.pop_back();
                 int width = right_index - left_index;
                 max_area = max(max_area, width * left_height);
             }
