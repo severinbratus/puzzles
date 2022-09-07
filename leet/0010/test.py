@@ -57,3 +57,6 @@ def test_atomize(expected, arg):
 ])
 def test_lengths(expected, args):
     assert expected == list(Solution.get_possible_lengths(*args))
+
+
+# My learned friend has told me that what I called atomizing is actually called `lexing`...
