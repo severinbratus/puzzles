@@ -18,7 +18,7 @@ class Solution:
         if n == 1:
             return ['()']
         result = []
-        for size_inner in range(0, n): # from 1 to n - 1
+        for size_inner in range(0, n): # from 0 to n - 1
             size_outer = (n - 1) - size_inner
             print(f"{size_inner=}, {size_outer=}")
             result += ["(%s)%s" % (inner_parens, outer_parens) for inner_parens, outer_parens in product(self.generateParenthesis(size_inner), self.generateParenthesis(size_outer))]

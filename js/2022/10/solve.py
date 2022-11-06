@@ -105,6 +105,8 @@ def solve(field: int):
 
     with open(f'field_{field}.txt') as fin:
         grid = [[int(char) if char != '.' else 0 for char in line.strip()] for line in fin.readlines()]
+    if grid == 2:
+        assert grid == maxg
 
     n = len(grid)
     m = len(grid[0])
@@ -219,6 +221,7 @@ def solve(field: int):
                 c_var = c_vars[key]
                 if c_var.x == 1:
                     print(key, values[key], '-->>', values[key] + d)
+            print(f"{m.num_solutions=}")
 
             render(values, c_vars, b_vars, d, size) # type: ignore
             print()
