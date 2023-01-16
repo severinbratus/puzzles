@@ -4,5 +4,5 @@ The third part, naturally the trickiest of the three, requires re-assembling fra
 
 See below an image of the network, and the winding path to the chip.
 
-![Network](/part3/tissue-pathed.png?raw=true)
+![Network](/hunts/humanoid/part3/tissue-pathed.png)
 
