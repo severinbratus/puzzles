@@ -10,4 +10,4 @@ To add insult to injury, the program that controls the player must be written in
 
 Here is how the amazing maze looks like, in full:
 
-![Maze](/screens/scr-full.png?raw=true)
+![Maze](/hunts/xennial/screens/scr-full.png?raw=true)
